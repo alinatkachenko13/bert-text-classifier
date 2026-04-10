@@ -55,6 +55,6 @@ pip install -r requirements.txt
 
 ### Превью на GitHub и формат ноутбука
 
-После сохранения из Colab в JSON иногда пропадают обязательные поля у выводов ячеек (например, `name` у `stream`), из‑за этого на GitHub появляется сообщение вроде **Invalid Notebook**. Скрипт `scripts/fix_notebook_github_preview.py` приводит `bert-text-classifier.ipynb` к виду, который принимают `nbformat` и рендер GitHub; перед коммитом ноутбука после Colab формат обычно выравнивается его запуском (`python3 scripts/fix_notebook_github_preview.py`). Проверка:
+После сохранения из Colab в JSON иногда пропадают обязательные поля у выводов ячеек (например, `name` у `stream`), плюс в выводах остаётся тяжёлый HTML таблиц Colab и служебные MIME-типы — из‑за этого на GitHub бывает **Invalid Notebook** или превью не строится. Скрипт `scripts/fix_notebook_github_preview.py` вычищает это и приводит `bert-text-classifier.ipynb` к виду, который принимают `nbformat` и рендер GitHub; перед коммитом ноутбука после Colab формат обычно выравнивается его запуском (`python3 scripts/fix_notebook_github_preview.py`). Проверка:
 
 `python3 -c "import nbformat; from nbformat.validator import validate; validate(nbformat.read('bert-text-classifier.ipynb', as_version=4)); print('ok')"`
